@@ -3,14 +3,12 @@ import sqlite3
 # TB : BooksTable
 # TB : EmployeeTable
 # TB : UserTable
+# TB : BookRegistryRegistryTable
 
 connection = sqlite3.connect("BookStore_DB.db")
 
 # Create Book Store Data Base
 cursor = connection.cursor()
-
-
-
 
 #---------------------------#
 # Create Book Details Table #
@@ -18,11 +16,11 @@ cursor = connection.cursor()
 bookDetailsTable_CMD = """CREATE TABLE IF NOT EXISTS
 BooksTable(
     Book_ID INTEGER PRIMARY KEY,
-    name TEXT,
-    author TEXT,
-    checkout_Status INTEGER,
-    last_checkout_date TEXT,
-    return_date TEXT
+    Name TEXT,
+    Author TEXT,
+    CheckoutStatus INTEGER,
+    LastCheckoutDate TEXT,
+    LastReturnDate TEXT
 )
 """
 # execute Create table
@@ -30,16 +28,16 @@ cursor.execute(bookDetailsTable_CMD)
 #============================================================================
 
 
-#-----------------------#
-# Create employee Table #
-#-----------------------#
+#---------------------------#
+# Create Employee Table     #
+#---------------------------#
 employeeTable_CMD = """CREATE TABLE IF NOT EXISTS
 EmployeeTable(
-    employee_ID INTEGER PRIMARY KEY,
-    role TEXT,
-    name TEXT,
-    surname TEXT,
-    date_of_birth TEXT
+    Employee_ID TEXT PRIMARY KEY,
+    Role TEXT,
+    Name TEXT,
+    Surname TEXT,
+    DateOfBirth TEXT
 )
 """
 # execute Create table
@@ -51,14 +49,32 @@ cursor.execute(employeeTable_CMD)
 #---------------------------#
 userDetailsTable_CMD = """CREATE TABLE IF NOT EXISTS
 UserTable(
-    user_ID INTEGER PRIMARY KEY,
-    name TEXT,
-    surname TEXT,
-    date_of_birth TEXT
+    User_ID INTEGER PRIMARY KEY,
+    Name TEXT,
+    Surname TEXT,
+    DateOfBirth TEXT
 )
 """
 # execute Create table
 cursor.execute(userDetailsTable_CMD)
+#============================================================================
+
+#---------------------------#
+# Create Registry Table     #
+#---------------------------#
+registryDetailsTable_CMD = """CREATE TABLE IF NOT EXISTS
+BookRegistryRegistryTable(
+    CheckOut_ID INTEGER PRIMARY KEY,
+    Book_ID TEXT,
+    User_ID TEXT,
+    Employee TEXT,
+    Status INTEGER,
+    CheckOutDate TEXT,
+    ReturnDate TEXT
+)
+"""
+# execute Create table
+cursor.execute(registryDetailsTable_CMD)
 #============================================================================
 
 
