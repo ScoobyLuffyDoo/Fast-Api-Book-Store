@@ -23,11 +23,11 @@ connection.commit()
 
 
 #-------------------------------------------------------------------#
-#                Create Book Details Data                           #
+#                Create Employee Details Data                           #
 # EmployeeTable                                                     #
 # Employee_ID, Role, Name, Surname, DateOfBirth                     #
 #-------------------------------------------------------------------#
-BookDetailsData =[
+EmployeeDetailsData =[
     ('JW820101','Cashier','John','Watson','1982-01-01'),
     ('SH840101','Finder','Sherlock','Holmes','1984-01-01'),
     ('GO820101','Packer','Greg','Officer','1982-01-01'),
@@ -35,7 +35,25 @@ BookDetailsData =[
     
 ]
 
-cursor.executemany("insert into EmployeeTable Values(?,?,?,?,?)", BookDetailsData)
+cursor.executemany("insert into EmployeeTable Values(?,?,?,?,?)", EmployeeDetailsData)
+connection.commit()
+
+#============================================================================
+
+#-------------------------------------------------------------------#
+#                Create User Details Data                           #
+# UserTable                                                         #    
+# User_ID, Name, Surname, DateOfBirth                     #
+#-------------------------------------------------------------------#
+UserDetailsData =[
+    (1,'James','May','1982-01-01'),
+    (2,'Jeremy','Clarkson','1984-01-01'),
+    (3,'Richard','Hammond','1982-01-01'),
+    (4,'Sheldon','Cooper','1982-01-01')
+    
+]
+
+cursor.executemany("insert into UserTable Values(?,?,?,?)", UserDetailsData)
 connection.commit()
 
 #============================================================================
