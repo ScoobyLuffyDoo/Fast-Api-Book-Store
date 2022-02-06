@@ -58,5 +58,22 @@ connection.commit()
 
 #============================================================================
 
+#-------------------------------------------------------------------#
+#                Create User Details Data                           #
+# BookRegistryRegistryTable                                                         #    
+# User_ID, Name, Surname, DateOfBirth                     #
+#-------------------------------------------------------------------#
+BookRegistryRegistryData =[
+    (1,'James','May','1982-01-01'),
+    (2,'Jeremy','Clarkson','1984-01-01'),
+    (3,'Richard','Hammond','1982-01-01'),
+    (4,'Sheldon','Cooper','1982-01-01')
+    
+]
+
+cursor.executemany("insert into BookRegistryRegistryTable Values(?,?,?,?)", UserDetailsData)
+connection.commit()
+
+#============================================================================
 
 connection.close()
