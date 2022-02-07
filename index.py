@@ -1,19 +1,30 @@
 from typing  import Optional
 from fastapi import FastAPI
+import sqlite3
+path='BookStore_DB.db'
+
 
 
 app = FastAPI()
 
 @app.get('/')
-def read_root():
+def Blha():
     return("Welcome to the Book Store")
 
+@app.get('/booksdetails') 
+def get_bookDetails():
+    connection = sqlite3.connect(path)
+    cursor = connection.cursor()
+    sql = "SELECT * FROM BooksTable"
+    cursor.execute(sql)
+    output = cursor.fetchmany(5)
+    connection.close()
+    return(output)
 
-@app.get("/books/{book_id}")
-def read_item(book_id: int, q: Optional[str] = None):
-    return {"book_id": book_id, "q": q}
+fake_items_db = [{"item_name": "Foo"}, {"item_name": "Bar"}, {"item_name": "Baz"}]
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+@app.get("/items/")
+async def read_item(skip: int = 0, limit: int = 10):
+    print(type(fake_items_db))
+    return fake_items_db[skip : skip + limit]

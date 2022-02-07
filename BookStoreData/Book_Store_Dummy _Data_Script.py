@@ -71,7 +71,7 @@ BookRegistryRegistryData =[
     
 ]
 
-cursor.executemany("insert into BookRegistryRegistryTable Values(?,?,?,?)", UserDetailsData)
+cursor.executemany("insert into BookRegistryRegistryTable Values(?,?,?,?,?,?,?)", BookRegistryRegistryData)
 connection.commit()
 
 #============================================================================
