@@ -14,8 +14,13 @@ class bookDetails_SRV:
         return tst
 
 
-
-
+# Book Body
+# {
+#     "name": "Foo",
+#     "description": "An optional description",
+#     "price": 45.2,
+#     "tax": 3.5
+# }
 
 
 # connection = sqlite3.connect(path)
