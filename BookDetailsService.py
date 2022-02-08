@@ -1,6 +1,6 @@
 import sqlite3
 import json
-
+# https://fastapi.tiangolo.com/tutorial/body/
 
 
 class bookDetails_SRV:    
@@ -19,7 +19,7 @@ class bookDetails_SRV:
 #     "name": "Foo",
 #     "description": "An optional description",
 #     "price": 45.2,
-#     "tax": 3.5
+#     "tax": 3.5 
 # }
 
 
