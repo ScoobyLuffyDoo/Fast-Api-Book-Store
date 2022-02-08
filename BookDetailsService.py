@@ -1,10 +1,17 @@
 import sqlite3
 import json
-# https://fastapi.tiangolo.com/tutorial/body/
+from pydantic import BaseModel
 
+class Bookinfo_Request(BaseModel):
+    Book_ID: int
+    Name: str
+    Author: str
+    CheckoutStatus: int
+    LastCheckoutDate: str
+    LastReturnDate:str
 
 class bookDetails_SRV:    
-    def createBookDetails(self,bookDetials):
+    def createBookDetails(self,bookDetails):
         return tst
     def readBookDetails(self):
         return tst
