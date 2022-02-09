@@ -11,10 +11,20 @@ class Bookinfo_Request(BaseModel):
     LastReturnDate:str
 
 class bookDetails_SRV:    
+    DB_path ='./BookStoreData/BookStore_DB.db'
     def createBookDetails(self,bookDetails):
-        return tst
+        return{"message":'Busy'}
     def readBookDetails(self):
-        return tst
+        try:
+            connection = sqlite3.connect(self.DB_path)
+            cursor = connection.cursor()
+            sql = "SELECT * FROM BooksTable"
+            cursor.execute(sql)
+            output = cursor.fetchmany(5)
+            connection.close()
+            return output
+        finally:
+            return{'Error':"Connection to DB Failed"}
     def updateBookDetails(self):
         return tst    
     def deleteBookDetails(self):
@@ -29,12 +39,3 @@ class bookDetails_SRV:
 #     "tax": 3.5 
 # }
 
-
-# connection = sqlite3.connect(path)
-#     cursor = connection.cursor()
-#     sql = "SELECT * FROM BooksTable"
-#     cursor.execute(sql)
-#     output = cursor.fetchmany(5)
-#     connection.close()
-#     tst =json.dumps(output)
-#     print(output)
