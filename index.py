@@ -2,6 +2,8 @@ from typing  import Optional
 from fastapi import FastAPI
 import BookDetailsService as booksrv
 import sqlite3
+from pydantic import BaseModel
+from fastapi.encoders import jsonable_encoder
 
 
 
@@ -32,6 +34,22 @@ async def create_BookRecord(books:booksrv.Bookinfo_Request):
 def get_bookDetails():
 
     return(output)
+# class user_dataBaseModel(BaseModel):
+#     username: str = ""
+#     id: str = ""
+#     email: str = ""
+#     firstName: str = ""
+#     lastName:str = ""
+#     createdTimestamp :int =0
+
+
+# @app.put('/user',response_model=user_dataBaseModel)
+# async def update_user(user_data: user_dataBaseModel):
+#     update_item_encoded = jsonable_encoder(user_data)
+#     print(update_item_encoded)
+#     user_id = user_data.username
+#     print(user_id)
+#     return {"message": "DONE"}
 
 
 

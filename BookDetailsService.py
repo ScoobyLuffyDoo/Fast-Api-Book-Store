@@ -23,7 +23,7 @@ class bookDetails_SRV:
             output = cursor.fetchmany(5)
             connection.close()
             return output
-        finally:
+        except:
             return{'Error':"Connection to DB Failed"}
     def updateBookDetails(self):
         return tst    
