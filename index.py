@@ -4,6 +4,7 @@ import BookDetailsService as booksrv
 import sqlite3
 from pydantic import BaseModel
 from fastapi.encoders import jsonable_encoder
+from fastapi.responses import JSONResponse
 
 
 
@@ -17,8 +18,10 @@ def root():
 @app.get('/books/bookregister')    
 def get_booksList():
     dic={}
-    book_Responce = bookService.readBookDetails()   
-    return{"Book":book_Responce}
+    book_Responce = bookService.readBookDetails()  
+    json_compatible_item_data = jsonable_encoder(book_Responce)
+    return JSONResponse(content=json_compatible_item_data) 
+    
 
 @app.get('/books/bookinfo')    
 def get_book(book_id:Optional[int] = None,name: Optional[str]=None,author:Optional[str]=None):

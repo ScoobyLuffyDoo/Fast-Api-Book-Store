@@ -13,19 +13,22 @@ class bookDetails_SRV:
     def createBookDetails(self,bookDetails):
         return{"message":'Busy'}
     def readBookDetails(self):
-        try:
-            connection = sqlite3.connect(self.DB_path)
-            cursor = connection.cursor()
-            sql = "SELECT * FROM BooksTable"
-            cursor.execute(sql)
-            output = cursor.fetchall()
-            print(type(output))
-            for books in output:
-                print(books)
-            connection.close()            
-            return output
-        except:
-            return{'Error':"Connection to DB Failed"}
+        bookslist ={}
+        # try:
+        connection = sqlite3.connect(self.DB_path)
+        connection.row_factory = sqlite3.Row 
+        cursor = connection.cursor()
+        sql = "SELECT * FROM BooksTable"
+        cursor.execute(sql)
+        output = cursor.fetchall()
+        # output =json.dumps(output)
+        # output =json.dumps( [dict(ix) for ix in sql] )
+        connection.close()        
+
+        return output
+
+        # except:
+        return{'Error':"Connection to DB Failed"}
     def updateBookDetails(self):
         return tst    
     def deleteBookDetails(self):
