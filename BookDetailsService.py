@@ -3,12 +3,10 @@ import json
 from pydantic import BaseModel
 
 class Bookinfo_Request(BaseModel):
-    Book_ID: int
+    Book_ID: str
     Name: str
     Author: str
-    CheckoutStatus: int
-    LastCheckoutDate: str
-    LastReturnDate:str
+    CaptureDate: int
 
 class bookDetails_SRV:    
     DB_path ='./BookStoreData/BookStore_DB.db'
@@ -20,8 +18,11 @@ class bookDetails_SRV:
             cursor = connection.cursor()
             sql = "SELECT * FROM BooksTable"
             cursor.execute(sql)
-            output = cursor.fetchmany(5)
-            connection.close()
+            output = cursor.fetchall()
+            print(type(output))
+            for books in output:
+                print(books)
+            connection.close()            
             return output
         except:
             return{'Error':"Connection to DB Failed"}
@@ -29,6 +30,11 @@ class bookDetails_SRV:
         return tst    
     def deleteBookDetails(self):
         return tst
+    def jsonResponseBookDetails(self,bookDetails):
+        json_build=()
+        for books in bookDetails:
+            json_build
+        return BookDetails_Json
 
 
 # Book Body

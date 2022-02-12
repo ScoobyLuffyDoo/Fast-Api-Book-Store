@@ -10,13 +10,13 @@ cursor = connection.cursor()
 # Book_ID, Name, Author, CheckoutStatus, CheckoutDate, ReturnDate   #
 #-------------------------------------------------------------------#
 BookDetailsData =[
-    (1,"Scooby Doo and the Pirate Treasure","James Gelsey",1,"2022-01-23","2022,02,06"),
-    (2,"Rats of NIMH","Robert C. O'Brien",0,"",""),
-    (3,"The Chronicles of Narnia","C. S. Lewis",1,"2022-01-25","2022,02,16"),
-    (4,"Percy Jackson & the Olympians","Rick Riordan",0,"","")
+    ("SDPTJM20123","Scooby Doo and the Pirate Treasure","James Gelsey","2022-01-23"),
+    ("RONRB20123","Rats of NIMH","Robert C. O'Brien","2022-01-23"),
+    ("TCONCL20125","The Chronicles of Narnia","C. S. Lewis","2022-01-25"),
+    ("PJTORR20123","Percy Jackson & the Olympians","Rick Riordan","2022-01-23")
 ]
 
-cursor.executemany("insert into BooksTable Values(?,?,?,?,?,?)", BookDetailsData)
+cursor.executemany("insert into BooksTable Values(?,?,?,?)", BookDetailsData)
 connection.commit()
 
 #============================================================================

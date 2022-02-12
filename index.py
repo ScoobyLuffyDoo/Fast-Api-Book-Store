@@ -16,13 +16,15 @@ def root():
 
 @app.get('/books/bookregister')    
 def get_booksList():
-    return("This will get all the books in Json format")
+    dic={}
+    book_Responce = bookService.readBookDetails()   
+    return{"Book":book_Responce}
 
 @app.get('/books/bookinfo')    
 def get_book(book_id:Optional[int] = None,name: Optional[str]=None,author:Optional[str]=None):
     if book_id == None:
        print("Search By Author")      
-    book_Responce = bookService.readBookDetails()        
+    book_Responce = bookService.readBookDetails()            
     return{"BookInfo":book_Responce}
     # return{"BookInfo":{"book_id":book_id, "name":name, "author":author}}
     

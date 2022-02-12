@@ -15,12 +15,10 @@ cursor = connection.cursor()
 #---------------------------#
 bookDetailsTable_CMD = """CREATE TABLE IF NOT EXISTS
 BooksTable(
-    Book_ID INTEGER PRIMARY KEY,
+    Book_ID TEXT PRIMARY KEY,
     Name TEXT,
     Author TEXT,
-    CheckoutStatus INTEGER,
-    LastCheckoutDate TEXT,
-    LastReturnDate TEXT
+    CaptureDate INTEGER
 )
 """
 # execute Create table
