@@ -60,5 +60,9 @@ def get_bookDetails():
 #     return {"message": "DONE"}
 
 
-
+# import sys         
+  
+# appending the directory of mod.py 
+# in the sys.path list
+# sys.path.append('D:/projects/base/app/modules')  
 # uvicorn index:app --reload

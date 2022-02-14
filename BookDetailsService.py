@@ -9,7 +9,7 @@ class Bookinfo_Request(BaseModel):
     CaptureDate: str
 
 class bookDetails_SRV:    
-    DB_path ='./BookStoreData/BookStore_DB.db'
+    DB_path ='./data/BookStore_DB.db'
 
     def createBookDetails(self,bookDetails):
         try:
