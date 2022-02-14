@@ -6,26 +6,43 @@ class Bookinfo_Request(BaseModel):
     Book_ID: str
     Name: str
     Author: str
-    CaptureDate: int
+    CaptureDate: str
 
 class bookDetails_SRV:    
     DB_path ='./BookStoreData/BookStore_DB.db'
+
     def createBookDetails(self,bookDetails):
-        return{"message":'Busy'}
+        try:
+            connection = sqlite3.connect(self.DB_path)            
+            cursor = connection.cursor()
+            keys = ['Book_ID', 'Name','Author','CaptureDate']
+            values = list( map(bookDetails.get, keys) )
+            cursor.execute("insert into BooksTable Values(?,?,?,?)", values)
+            connection.commit()
+            output={"message":'Record Created'}
+
+        except Exception as e:
+            print(e)
+            output={"message":e }
+        finally:
+            connection.close()        
+            return output    
+              
     def readBookDetails(self):
         bookslist ={}
-        # try:
-        connection = sqlite3.connect(self.DB_path)
-        connection.row_factory = sqlite3.Row 
-        cursor = connection.cursor()
-        sql = "SELECT * FROM BooksTable"
-        cursor.execute(sql)
-        output = cursor.fetchall()
-        # output =json.dumps(output)
-        # output =json.dumps( [dict(ix) for ix in sql] )
-        connection.close()        
-
-        return output
+        try:
+            connection = sqlite3.connect(self.DB_path)
+            connection.row_factory = sqlite3.Row 
+            cursor = connection.cursor()
+            sql = "SELECT * FROM BooksTable"
+            cursor.execute(sql)
+            output = cursor.fetchall()
+            
+        except:
+            output={"message":'DB Connection Failed'}
+        finally:
+            connection.close()        
+            return output
 
         # except:
         return{'Error':"Connection to DB Failed"}

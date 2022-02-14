@@ -18,7 +18,7 @@ BooksTable(
     Book_ID TEXT PRIMARY KEY,
     Name TEXT,
     Author TEXT,
-    CaptureDate INTEGER
+    CaptureDate TEXT
 )
 """
 # execute Create table

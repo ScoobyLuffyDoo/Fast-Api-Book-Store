@@ -9,6 +9,7 @@ from fastapi.responses import JSONResponse
 
 
 bookService =booksrv.bookDetails_SRV()
+bookService =booksrv.bookDetails_SRV()
 app = FastAPI()
 
 @app.get('/')
@@ -31,9 +32,11 @@ def get_book(book_id:Optional[int] = None,name: Optional[str]=None,author:Option
     return{"BookInfo":book_Responce}
     # return{"BookInfo":{"book_id":book_id, "name":name, "author":author}}
     
+
 @app.post('/books/Create')
 async def create_BookRecord(books:booksrv.Bookinfo_Request):
-    return{"BookData":books}
+    book_Responce =bookService.createBookDetails(books.dict())
+    return book_Responce
 
 @app.get('/booksdetails') 
 def get_bookDetails():
