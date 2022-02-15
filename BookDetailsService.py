@@ -28,7 +28,7 @@ class bookDetails_SRV:
             connection.close()        
             return output    
               
-    def readBookDetails(self):
+    def readAllBookDetails(self):
         bookslist ={}
         try:
             connection = sqlite3.connect(self.DB_path)
@@ -46,6 +46,8 @@ class bookDetails_SRV:
 
         # except:
         return{'Error':"Connection to DB Failed"}
+    def getbookdetail(self,bookDetails):
+        return bookDetails
     def updateBookDetails(self):
         return tst    
     def deleteBookDetails(self):
