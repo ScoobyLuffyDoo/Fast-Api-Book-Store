@@ -1,22 +1,19 @@
 from typing  import Optional
 from fastapi import FastAPI
-import BookDetailsService as booksrv
-import sqlite3
-from pydantic import BaseModel
+import services.BookDetailsService as books_service
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 
 
 
-bookService =booksrv.bookDetails_SRV()
-bookService =booksrv.bookDetails_SRV()
+bookService =books_service.bookDetails_SRV()
 app = FastAPI()
 
 @app.get('/')
 def root():
     return("This is the book store API Service")
 
-@app.get('/books/allbooks')    
+@app.get('/bookdetails/allbooks')    
 def get_booksList():
     dic={}
     book_Responce = bookService.readAllBookDetails()  
@@ -24,14 +21,18 @@ def get_booksList():
     return JSONResponse(content=json_compatible_item_data) 
     
 @app.get('/bookdetails')
-async def get_BookRecord(books:booksrv.Bookinfo_Request):
+async def get_BookRecord(books:books_service.Bookinfo_Request):
     book_Responce =books.dict()
     return book_Responce
 
-@app.post('/books/Create')
-async def create_BookRecord(books:booksrv.Bookinfo_Request):
+@app.post('/bookdetails/Create')
+async def create_BookRecord(books:books_service.Bookinfo_Request):
     book_Responce =bookService.createBookDetails(books.dict())
     return book_Responce
+
+
+
+
 # class user_dataBaseModel(BaseModel):
 #     username: str = ""
 #     id: str = ""
