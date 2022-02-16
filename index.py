@@ -1,37 +1,41 @@
 from typing  import Optional
 from fastapi import FastAPI
-import services.BookDetailsService as books_service
+import resources
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 
 
-
-bookService =books_service.bookDetails_SRV()
+bookService = resources.BookDetails_SRV()
 app = FastAPI()
 
+# Root Path
 @app.get('/')
 def root():
     return("This is the book store API Service")
 
+# Get All Book Details
 @app.get('/bookdetails/allbooks')    
 def get_booksList():
-    dic={}
     book_Responce = bookService.readAllBookDetails()  
     json_compatible_item_data = jsonable_encoder(book_Responce)
-    return JSONResponse(content=json_compatible_item_data) 
-    
+    return JSONResponse(content=json_compatible_item_data)
+
+# Get Single Book Revord
 @app.get('/bookdetails')
-async def get_BookRecord(books:books_service.Bookinfo_Request):
+async def get_BookRecord(books:resources.BookInfo_Request):
     book_Responce =books.dict()
     return book_Responce
 
+# Create Book Record
 @app.post('/bookdetails/Create')
-async def create_BookRecord(books:books_service.Bookinfo_Request):
+async def create_BookRecord(books):
     book_Responce =bookService.createBookDetails(books.dict())
     return book_Responce
 
 
-
+@app.update('/bookdetials/remove')
+async def delete_BookRecord(books):
+    book
 
 # class user_dataBaseModel(BaseModel):
 #     username: str = ""

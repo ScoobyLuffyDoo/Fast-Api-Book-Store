@@ -2,13 +2,13 @@ import sqlite3
 import json
 from pydantic import BaseModel
 
-class Bookinfo_Request(BaseModel):
+class BookInfo_Request(BaseModel):
     Book_ID: str
     Name: str
     Author: str
     CaptureDate: str
 
-class bookDetails_SRV:    
+class BookDetails_SRV:    
     DB_path ='./data/BookStore_DB.db'
 
     def createBookDetails(self,bookDetails):

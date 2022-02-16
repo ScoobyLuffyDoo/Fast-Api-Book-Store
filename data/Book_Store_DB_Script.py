@@ -47,7 +47,7 @@ cursor.execute(employeeTable_CMD)
 #---------------------------#
 userDetailsTable_CMD = """CREATE TABLE IF NOT EXISTS
 UserTable(
-    User_ID INTEGER PRIMARY KEY,
+    User_ID TEXT PRIMARY KEY,
     Name TEXT,
     Surname TEXT,
     DateOfBirth TEXT
