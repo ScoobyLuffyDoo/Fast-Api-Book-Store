@@ -31,11 +31,22 @@ async def get_BookRecord(books:resources.BookInfo_Request):
 async def create_BookRecord(books):
     book_Responce =bookService.createBookDetails(books.dict())
     return book_Responce
-
-
-@app.update('/bookdetials/remove')
+    
+# Update Book Details
+@app.update('/bookdetials/update')
 async def delete_BookRecord(books):
-    book
+    return{books}
+
+@app.get('/user/all_users')    
+def get_booksList():
+    book_Responce = bookService.readAllBookDetails()  
+    json_compatible_item_data = jsonable_encoder(book_Responce)
+    return JSONResponse(content=json_compatible_item_data)
+
+@app.get('/userdetails')
+async def get_BookRecord(books:resources.BookInfo_Request):
+    book_Responce =books.dict()
+    return book_Responce
 
 # class user_dataBaseModel(BaseModel):
 #     username: str = ""
