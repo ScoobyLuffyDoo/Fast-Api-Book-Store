@@ -16,37 +16,38 @@ def root():
 # Get All Book Details
 @app.get('/bookdetails/allbooks')    
 def get_booksList():
-    book_Responce = bookService.readAllBookDetails()  
-    json_compatible_item_data = jsonable_encoder(book_Responce)
+    book_Response = bookService.readAllBookDetails()  
+    json_compatible_item_data = jsonable_encoder(book_Response)
     return JSONResponse(content=json_compatible_item_data)
 
 # Get Single Book Revord
 @app.get('/bookdetails')
 async def get_BookRecord(books:resources.BookInfo_Request):
-    book_Responce =books.dict()
-    return book_Responce
+    book_Response =books.dict()
+    response = bookService.getBookDetail(book_Response)
+    return response
 
 # Create Book Record
 @app.post('/bookdetails/Create')
-async def create_BookRecord(books):
-    book_Responce =bookService.createBookDetails(books.dict())
-    return book_Responce
+async def create_BookRecord(books:resources.BookInfo_Request):
+    book_Response =bookService.createBookDetails(books.dict())
+    return response
     
 # Update Book Details
-@app.update('/bookdetials/update')
+@app.put('/bookdetials/update')
 async def delete_BookRecord(books):
     return{books}
 
 @app.get('/user/all_users')    
 def get_booksList():
-    book_Responce = bookService.readAllBookDetails()  
-    json_compatible_item_data = jsonable_encoder(book_Responce)
+    book_Response = bookService.readAllBookDetails()  
+    json_compatible_item_data = jsonable_encoder(book_Response)
     return JSONResponse(content=json_compatible_item_data)
 
 @app.get('/userdetails')
 async def get_BookRecord(books:resources.BookInfo_Request):
-    book_Responce =books.dict()
-    return book_Responce
+    book_Response =books.dict()
+    return book_Response
 
 # class user_dataBaseModel(BaseModel):
 #     username: str = ""
@@ -79,6 +80,6 @@ async def get_BookRecord(books:resources.BookInfo_Request):
 # def get_book(book_id:Optional[int] = None,name: Optional[str]=None,author:Optional[str]=None):
 #     if book_id == None:
 #        print("Search By Author")      
-#     book_Responce = bookService.readBookDetails()            
-#     return{"BookInfo":book_Responce}
+#     book_Response = bookService.readBookDetails()            
+#     return{"BookInfo":book_Response}
     # return{"BookInfo":{"book_id":book_id, "name":name, "author":author}}

@@ -1,16 +1,18 @@
+from typing import Optional
 import sqlite3
 import json
 from pydantic import BaseModel
 
 class BookInfo_Request(BaseModel):
     Book_ID: str
-    Name: str
-    Author: str
-    CaptureDate: str
+    Name: Optional[str] = None
+    Author: Optional[str] = None
+    CaptureDate: Optional[str] = None
 
 class BookDetails_SRV:    
     DB_path ='./data/BookStore_DB.db'
 
+    # Create Book Details Function
     def createBookDetails(self,bookDetails):
         try:
             connection = sqlite3.connect(self.DB_path)            
@@ -26,8 +28,9 @@ class BookDetails_SRV:
             output={"message":e }
         finally:
             connection.close()        
-            return output    
-              
+            return output 
+
+    # Get All BookDetails 
     def readAllBookDetails(self):
         bookslist ={}
         try:
@@ -43,11 +46,37 @@ class BookDetails_SRV:
         finally:
             connection.close()        
             return output
+            
+    # Get Single Book Details
+    def getBookDetail(self,bookDetails):
+        bookslist ={}
+        where_i=""
+        try:
+            if bookDetails['Book_ID']:
+                where_i = f"Book_ID = '{bookDetails['Book_ID']}'"
+            elif bookDetails['Author']:
+                where_i = f"Author = '{bookDetails['Author']}'"
+            elif bookDetails['Name']:
+                where_i = f"Name = '{bookDetails['Name']}'"           
+            if where_i:    
+                connection = sqlite3.connect(self.DB_path)
+                connection.row_factory = sqlite3.Row 
+                cursor = connection.cursor()
+                sql = f"SELECT * FROM BooksTable where {where_i}"
+                try:
+                    cursor.execute(sql)
+                    output = cursor.fetchall()                            
+                except:
+                    output={"message":'DB Connection Failed'}
+                finally:
+                    connection.close() 
+            else:
+                output = {"message":'Please Search by Book ID, Name or Author'}  
+        except:
+            output = {"message":'Book Not Found'}    
+        finally:              
+            return output      
 
-        # except:
-        return{'Error':"Connection to DB Failed"}
-    def getbookdetail(self,bookDetails):
-        return bookDetails
     def updateBookDetails(self):
         return tst    
     def deleteBookDetails(self):
