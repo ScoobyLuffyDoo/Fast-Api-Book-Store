@@ -3,6 +3,7 @@ from fastapi import FastAPI
 import resources
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
+import json
 
 
 bookService = resources.BookDetails_SRV()
@@ -18,25 +19,39 @@ def root():
 def get_booksList():
     book_Response = bookService.readAllBookDetails()  
     json_compatible_item_data = jsonable_encoder(book_Response)
-    return JSONResponse(content=json_compatible_item_data)
+    return {"books":book_Response}
+    
 
 # Get Single Book Revord
 @app.get('/bookdetails')
 async def get_BookRecord(books:resources.BookInfo_Request):
     book_Response =books.dict()
-    response = bookService.getBookDetail(book_Response)
+    response = bookService.getBookDetail(book_Response) 
     return response
 
 # Create Book Record
 @app.post('/bookdetails/Create')
 async def create_BookRecord(books:resources.BookInfo_Request):
-    book_Response =bookService.createBookDetails(books.dict())
+    response =bookService.createBookDetails(books.dict())
     return response
     
 # Update Book Details
 @app.put('/bookdetials/update')
-async def delete_BookRecord(books):
-    return{books}
+async def update_BookRecord(books:resources.BookInfo_Request):
+    bookItemsUpdate = jsonable_encoder(books.dict())
+    response = bookService.updateBookDetails(bookItemsUpdate)
+    return response
+
+# Delete Book Details
+@app.delete('/bookdetials/delete')
+async def delete_user(books:resources.BookInfo_Request):
+    bookItemsUpdate = jsonable_encoder(books.dict())
+    response = bookService.deleteBookDetails(bookItemsUpdate)
+    return response
+
+
+
+
 
 @app.get('/user/all_users')    
 def get_booksList():
