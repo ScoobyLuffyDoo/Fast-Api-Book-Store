@@ -1,13 +1,14 @@
 from typing import Optional
 import sqlite3
 import json
+from fastapi import FastAPI
 from pydantic import BaseModel
 
-class BookInfo_Request(BaseModel):
+class BookInfoModel(BaseModel):
     Book_ID: str
-    Name: Optional[str] = None
-    Author: Optional[str] = None
-    CaptureDate: Optional[str] = None
+    Name: str | None = None
+    Author: str | None = None
+    CaptureDate: str | None = None
 
 class BookDetails_SRV:    
     DB_path ='./data/BookStore_DB.db'   
@@ -30,7 +31,6 @@ class BookDetails_SRV:
 
     # Get All BookDetails 
     def readAllBookDetails(self):
-        bookslist ={}
         try:
             connection = sqlite3.connect(self.DB_path)
             connection.row_factory = sqlite3.Row 
@@ -46,7 +46,6 @@ class BookDetails_SRV:
             
     # Get Single Book Details
     def getBookDetail(self,bookDetails):
-        bookslist = {}
         where_i : str
         try:
             if bookDetails['Book_ID']:
@@ -108,7 +107,7 @@ class BookDetails_SRV:
     def deleteBookDetails(self,bookDetails):
         try:
             if not bookDetails["Book_ID"]:
-                output = {"message":"Please Use Book ID to make Updates"}
+                output = {"message":"Please Use Book ID to Delete book"}
             else:
                 bookDetails["Book_ID"]
                 connection = sqlite3.connect(self.DB_path)

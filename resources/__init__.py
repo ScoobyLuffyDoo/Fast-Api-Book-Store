@@ -1,1 +1,2 @@
-from resources.BookDetailsService import BookInfo_Request,BookDetails_SRV
+from resources.BookDetails import BookInfoModel,BookDetails_SRV
+from resources.EmployeeDetails import EmployeeModel,EmployeeDetails_SRV
