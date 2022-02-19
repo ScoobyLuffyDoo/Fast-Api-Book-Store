@@ -46,10 +46,10 @@ connection.commit()
 # User_ID, Name, Surname, DateOfBirth                     #
 #-------------------------------------------------------------------#
 UserDetailsData =[
-    (1,'James','May','1982-01-01'),
-    (2,'Jeremy','Clarkson','1984-01-01'),
-    (3,'Richard','Hammond','1982-01-01'),
-    (4,'Sheldon','Cooper','1982-01-01')
+    ('1','James','May','1982-01-01'),
+    ('2','Jeremy','Clarkson','1984-01-01'),
+    ('3','Richard','Hammond','1982-01-01'),
+    ('4','Sheldon','Cooper','1982-01-01')
     
 ]
 

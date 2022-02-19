@@ -1,13 +1,12 @@
-from typing  import Optional
 from fastapi import FastAPI
 import resources
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-import json
-
+import resources
 
 bookService = resources.BookDetails_SRV()
 EmployeeService = resources.EmployeeDetails_SRV()
+UserService = resources.UserDetails_SRV()
 app = FastAPI()
 
 # Root Path
@@ -84,7 +83,41 @@ async def delete_EmployeeRecord(employee:resources.EmployeeModel):
     response = EmployeeService.deleteEmployee(employeeItemsDelete)
     return response
 
+# ******************************
+# *       User Details      *
+# ******************************
 
+# Get the user details
+@app.get('/user')
+async def get_user(user:resources.UserModel):
+    response = UserService.getUser(user.dict())
+    return response
+
+# Get a List of all the Users 
+@app.get('/user/all')    
+async def get_UserList():
+    response = UserService.readAllUsers()
+    return {"Users":response}
+
+# Create a user
+@app.post('/user/create')
+async def create_User(user:resources.UserModel):
+    response = UserService.createUser(user.dict())
+    return response
+
+# Update a user
+@app.put('/user/update')
+async def update_User(user:resources.UserModel):
+    userItemsUpdate = jsonable_encoder(user.dict())
+    response = UserService.updateUser(userItemsUpdate)
+    return response
+
+# Delete a user
+@app.delete('/user/delete')
+async def delete_User(user:resources.UserModel):
+    userItemsUpdate = jsonable_encoder(user.dict())
+    response = UserService.deleteUser(userItemsUpdate)
+    return response
 
 if __name__ =="__main__":
      main()    
