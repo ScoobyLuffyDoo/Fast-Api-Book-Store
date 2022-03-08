@@ -18,7 +18,7 @@ def root():
 @app.get('/books/all')    
 async def get_booksList():
     book_Response = bookService.readAllBookDetails()  
-    json_compatible_item_data = jsonable_encoder(book_Response)
+    # json_compatible_item_data = jsonable_encoder(book_Response)
     return {"books":book_Response}
     
 # Get Single Book Record
